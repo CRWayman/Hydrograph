@@ -28,16 +28,14 @@ import matplotlib.dates as mdates
 
 '''Selecting the file from the correct path and creating a pandas dataframe from the excel file'''
 
-user = 'Callum Wayman'
-
 precip_filename = 'LeadingRidgePrecip.xlsx'
 q_filename = 'Juniata_Discharge.xlsx'
 
-precip_file = pd.ExcelFile(os.getcwd() + '\\' + precip_filename, sheetname = 'Data')
-q_file = pd.ExcelFile(os.getcwd() + '\\' + q_filename, sheetname = 'Data')
+precip_file = pd.ExcelFile(os.getcwd() + '\\' + precip_filename)
+q_file = pd.ExcelFile(os.getcwd() + '\\' + q_filename)
 
-precip = pd.DataFrame(pd.read_excel(precip_file))
-q = pd.DataFrame(pd.read_excel(q_file))
+precip = pd.DataFrame(pd.read_excel(precip_file, sheet_name = 'Data'))
+q = pd.DataFrame(pd.read_excel(q_file, sheet_name = 'Data'))
 
 '''Creating date and data arrays for precipitation and discharge'''
 precip_arr = np.array(precip.loc[:,'Precipitation (mm)'])
@@ -51,7 +49,6 @@ years = mdates.YearLocator()
 
 #%% Plots
 '''Create a hydrograph plot of precipitation and discharge'''
-
 
 plt.close('all')
 
